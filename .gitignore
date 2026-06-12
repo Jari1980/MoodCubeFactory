@@ -1,0 +1,28 @@
+# IntelliJ
+.idea/
+*.iml
+
+# Java
+target/
+out/
+
+# Maven wrapper logs
+.maven/
+
+# Azure Functions
+local.settings.json
+bin/
+obj/
+
+# Node / React
+node_modules/
+dist/
+build/
+
+# Environment files
+.env
+.env.local
+
+# OS files
+.DS_Store
+Thumbs.db

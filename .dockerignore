@@ -1,0 +1,22 @@
+# Git
+.git
+.gitignore
+
+# Env files
+.env
+.env.*
+
+# IDE
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Java build output
+target/
+*.jar
+
+# Logs
+*.log
