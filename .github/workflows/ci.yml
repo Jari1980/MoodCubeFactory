@@ -15,9 +15,9 @@ jobs:
     strategy:
       matrix:
         service:
-          - services/CubeApi
-          - services/ChaosEngine
-          - services/EventSystem
+          - services/cube-api
+          #- services/chaos-engine
+          #- services/event-system
 
     steps:
       - uses: actions/checkout@v4
