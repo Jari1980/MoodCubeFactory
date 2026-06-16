@@ -13,6 +13,8 @@ Responsibilities:
 This service is the owner of the cubes table.
 
 ## Local Run Configuration
+Use `local.settings.example.json` as a template.
+Copy it to `local.settings.json` before running the project.
 
 To run the Cube API locally on a fixed port:
 
