@@ -36,6 +36,12 @@
             <artifactId>azure-storage-queue</artifactId>
             <version>12.23.0</version>
         </dependency>
+        <!-- Service Bus, not in use since we run Rainbow storm local with queue instead -->
+        <dependency>
+            <groupId>com.azure</groupId>
+            <artifactId>azure-messaging-servicebus</artifactId>
+            <version>7.17.5</version>
+        </dependency>
     </dependencies>
 
     <build>
