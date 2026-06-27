@@ -1,5 +1,7 @@
 package com.moodcubefactory.chaos.service;
 
+import com.moodcubefactory.chaos.dto.ChaosCommand;
+import com.moodcubefactory.chaos.messaging.AzureQueueCommandPublisher;
 import com.moodcubefactory.chaos.messaging.QueuePublisher;
 import com.moodcubefactory.chaos.model.CubeEvent;
 
@@ -16,6 +18,21 @@ public class ChaosService {
 
         CubeEvent event = generator.generate();
         publisher.publish(event);
+
+        return event;
+    }
+
+    public CubeEvent resetFactory() {
+
+        CubeEvent event = new ResetFactoryGenerator().generate();
+
+        ChaosCommand command = new ChaosCommand("RESET_FACTORY");
+
+        try {
+            new AzureQueueCommandPublisher().publish(command);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         return event;
     }
