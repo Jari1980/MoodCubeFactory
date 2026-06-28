@@ -10,4 +10,6 @@ public interface CubeRepository {
     Optional<Cube> getById(int id);
     Cube update(Cube cube);
     void resetFactory();
+    void rainbowStorm();
+    void drainEnergy();
 }

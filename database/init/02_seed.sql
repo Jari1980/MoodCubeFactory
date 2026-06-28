@@ -10,17 +10,23 @@
 TRUNCATE TABLE cubes RESTART IDENTITY CASCADE;
 
 -- Generate 100 cubes
-INSERT INTO cubes (
-    color,
-    mood,
-    energy,
-    updated_at
-)
+INSERT INTO cubes (color, mood, energy, updated_at)
 SELECT
-    (ARRAY['green', 'blue', 'yellow', 'red', 'purple'])
-        [floor(random() * 5 + 1)],
-    (ARRAY['balanced', 'calm', 'unstable', 'angry', 'chaotic'])
-        [floor(random() * 5 + 1)],
-    floor(random() * 101)::int,
+    CASE
+        WHEN energy <= 30 THEN 'gray'
+        WHEN energy <= 70 THEN 'blue'
+        ELSE 'green'
+    END AS color,
+
+    CASE
+        WHEN energy <= 30 THEN 'EXHAUSTED'
+        WHEN energy <= 70 THEN 'NEUTRAL'
+        ELSE 'ACTIVE'
+    END AS mood,
+
+    energy,
     NOW()
-FROM generate_series(1, 100);
+FROM (
+    SELECT floor(random() * 101)::int AS energy
+    FROM generate_series(1, 100)
+) t;
