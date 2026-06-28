@@ -9,4 +9,5 @@ public interface CubeRepository {
     List<Cube> getAll();
     Optional<Cube> getById(int id);
     Cube update(Cube cube);
+    void resetFactory();
 }

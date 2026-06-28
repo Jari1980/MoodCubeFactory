@@ -111,4 +111,28 @@ public class PostgresCubeRepository implements CubeRepository{
         return getById(cube.getId())
                 .orElseThrow();
     }
+
+    @Override
+    public void resetFactory() {
+
+        String sql = """
+        UPDATE cubes
+        SET
+            color = (ARRAY['green', 'blue', 'yellow', 'red', 'purple'])
+                [floor(random() * 5 + 1)],
+            mood = (ARRAY['balanced', 'calm', 'unstable', 'angry', 'chaotic'])
+                [floor(random() * 5 + 1)],
+            energy = floor(random() * 101)::int,
+            updated_at = NOW()
+        """;
+
+        try (Connection conn = DatabaseConfig.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.executeUpdate();
+
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to reset factory", e);
+        }
+    }
 }
