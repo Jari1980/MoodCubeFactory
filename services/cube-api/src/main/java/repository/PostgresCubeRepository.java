@@ -116,14 +116,25 @@ public class PostgresCubeRepository implements CubeRepository{
     public void resetFactory() {
 
         String sql = """
-        UPDATE cubes
-        SET
-            color = (ARRAY['green', 'blue', 'yellow', 'red', 'purple'])
-                [floor(random() * 5 + 1)],
-            mood = (ARRAY['balanced', 'calm', 'unstable', 'angry', 'chaotic'])
-                [floor(random() * 5 + 1)],
-            energy = floor(random() * 101)::int,
-            updated_at = NOW()
+                UPDATE cubes c
+                SET
+                    energy = t.energy,
+                    mood = CASE
+                        WHEN t.energy <= 30 THEN 'EXHAUSTED'
+                        WHEN t.energy <= 70 THEN 'NEUTRAL'
+                        ELSE 'ACTIVE'
+                    END,
+                    color = CASE
+                        WHEN t.energy <= 30 THEN 'gray'
+                        WHEN t.energy <= 70 THEN 'blue'
+                        ELSE 'green'
+                    END,
+                    updated_at = NOW()
+                FROM (
+                    SELECT id, floor(random() * 101)::int AS energy
+                    FROM cubes
+                ) t
+                WHERE c.id = t.id;
         """;
 
         try (Connection conn = DatabaseConfig.getConnection();
@@ -133,6 +144,57 @@ public class PostgresCubeRepository implements CubeRepository{
 
         } catch (Exception e) {
             throw new RuntimeException("Failed to reset factory", e);
+        }
+    }
+
+    @Override
+    public void rainbowStorm() {
+
+        String sql = """
+        UPDATE cubes
+        SET
+            color = (ARRAY['green','blue','yellow','red','purple'])
+                [floor(random() * 5 + 1)],
+            updated_at = NOW()
+        """;
+
+        try (Connection conn = DatabaseConfig.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.executeUpdate();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void drainEnergy() {
+
+        String sql = """
+        UPDATE cubes
+        SET
+            energy = GREATEST(energy - 20, 0),
+            mood = CASE
+                WHEN GREATEST(energy - 20, 0) <= 30 THEN 'EXHAUSTED'
+                WHEN GREATEST(energy - 20, 0) <= 70 THEN 'NEUTRAL'
+                ELSE 'ACTIVE'
+            END,
+            color = CASE
+                WHEN GREATEST(energy - 20, 0) <= 30 THEN 'gray'
+                WHEN GREATEST(energy - 20, 0) <= 70 THEN 'blue'
+                ELSE 'green'
+            END,
+            updated_at = NOW()
+        """;
+
+        try (Connection conn = DatabaseConfig.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.executeUpdate();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }
