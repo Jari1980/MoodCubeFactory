@@ -48,7 +48,6 @@ export default function Dashboard() {
 
         <div className="log">Event log (coming soon)</div>
       </main>
-
     </div>
   );
 }

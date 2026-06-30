@@ -1,49 +1,51 @@
 .cube-grid {
-    display: grid;
-    grid-template-columns: repeat(10, 36px);
-    grid-auto-rows: 36px;
+  display: grid;
+  grid-template-columns: repeat(10, 36px);
+  grid-auto-rows: 36px;
 
-    gap: 6px;
+  gap: 6px;
 
-    justify-content: center;
-    align-content: start;
+  justify-content: center;
+  align-content: start;
 }
 
 .cube {
-    border: none;
-    border-radius: 6px;
+  border: none;
+  border-radius: 6px;
 
-    cursor: pointer;
+  cursor: pointer;
 
-    font-size: 10px;
-    font-weight: bold;
+  font-size: 10px;
+  font-weight: bold;
 
-    color: rgba(0,0,0,0.7);
+  color: rgba(0, 0, 0, 0.7);
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .cube:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .cube.selected {
-    outline: 2px solid black;
-    transform: scale(1.2);
-    z-index: 2;
+  outline: 2px solid black;
+  transform: scale(1.2);
+  z-index: 2;
 }
 
 .cube-cell {
-    width: 36px;
-    height: 36px;
+  width: 36px;
+  height: 36px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    overflow: visible;
+  overflow: visible;
 }
