@@ -9,5 +9,9 @@
     "POSTGRES_DB": "moodcube",
     "POSTGRES_USER": "moodcube",
     "POSTGRES_PASSWORD": "moodcube"
+  },
+  "Host": {
+    "CORS": "http://localhost:5173",
+    "CORSCredentials": false
   }
 }
