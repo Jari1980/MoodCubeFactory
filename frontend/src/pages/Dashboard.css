@@ -1,0 +1,63 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  overflow: hidden; /* IMPORTANT */
+
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.header {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 12px;
+}
+
+.content {
+  display: grid;
+
+  grid-template-columns: 1fr 280px;
+  grid-template-rows: 1fr auto auto;
+
+  gap: 10px;
+
+  flex: 1;
+
+  min-height: 0;
+}
+
+.cube-area,
+.sidebar {
+  overflow: hidden;
+
+  border: 1px solid #ddd;
+  border-radius: 8px;
+
+  padding: 10px;
+}
+
+.cube-area {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+
+  overflow: hidden;
+}
+
+.log {
+  grid-column: 1 / -1;
+
+  height: 120px;
+
+  border: 1px solid #ddd;
+  border-radius: 8px;
+
+  padding: 8px;
+
+  font-size: 12px;
+}
+
+.actions {
+  grid-column: 1 / -1;
+}
